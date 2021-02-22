@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vault-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: vault
+  template:
+    metadata:
+      labels:
+        component: vault
+    spec:
+      volumes:
+        - name: vault-storage
+          persistentVolumeClaim:
+            claimName: vault-pvc
+      containers:
+        - name: vault
+          image: vault
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            capabilities:
+              add: ["IPC_LOCK", "SETFCAP", "CHOWN", "SETPCAP", "CAP_CHOWN"]
+          ports:
+            - containerPort: 8200
+          volumeMounts:
+            - name: vault-storage
+              mountPath: /vault
