@@ -4,6 +4,7 @@
 This project is to build a local development or test environment for Kubernetes workloads. It uses **k3d** which is a lightweight wrapper to run k3s (Rancher Lab’s minimal Kubernetes distribution) in docker. Please refer to [official website](https://k3d.io/) for more information.
 
 The project does not install Traefik V1 that comes with K3d by default. Instead, it installs Traefik V2 with a Helm chart and exposes its dashboard on localhost over port 9000.
+http://localhost:9000/dashboard/#/
 
 ## Prerequisites
 Docker and Helm need to be installed in your local development environment.
