@@ -1,0 +1,34 @@
+## HOST BASED ##
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: nexus
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  rules:
+  - host: "nexus.onur.lab"
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nexus
+          servicePort: 8081
+
+## PATH BASED ##
+#apiVersion: networking.k8s.io/v1beta1
+#kind: Ingress
+#metadata:
+#  name: nexus
+#  annotations:
+#    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+#    traefik.ingress.kubernetes.io/router.tls: "true"
+#spec:
+#  rules:
+#  - http:
+#      paths:
+#      - path: /nexus
+#        backend:
+#          serviceName: nexus
+#          servicePort: 8081

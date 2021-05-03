@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vault
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: vault
+  template:
+    metadata:
+      labels:
+        component: vault
+    spec:
+      volumes:
+        - name: vault-logs
+          persistentVolumeClaim:
+            claimName: vault-logs
+        - name: vault-file
+          persistentVolumeClaim:
+            claimName: vault-file
+      containers:
+        - name: vault
+          image: vault
+          ports:
+            - containerPort: 8200
+          volumeMounts:
+            - name: vault-logs
+              mountPath: /vault/logs
+            - name: vault-file
+              mountPath: /vault/file
+          securityContext:
+            capabilities:
+              add:
+                - IPC_LOCK
+                - CHOWN

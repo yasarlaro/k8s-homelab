@@ -1,0 +1,34 @@
+## HOST BASED ##
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: vault
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  rules:
+  - host: "vault.onur.lab"
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: vault
+          servicePort: 8200
+
+## PATH BASED ##
+#apiVersion: networking.k8s.io/v1beta1
+#kind: Ingress
+#metadata:
+#  name: vault
+#  annotations:
+#    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+#    traefik.ingress.kubernetes.io/router.tls: "true"
+#spec:
+#  rules:
+#  - http:
+#      paths:
+#      - path: /vault
+#        backend:
+#          serviceName: vault
+#          servicePort: 80

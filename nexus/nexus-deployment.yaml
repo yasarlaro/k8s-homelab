@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nexus-deployment
+  name: nexus
 spec:
   replicas: 1
   selector:

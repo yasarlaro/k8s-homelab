@@ -1,0 +1,34 @@
+## HOST BASED ##
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: nginx
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  rules:
+  - host: "nginx.onur.lab"
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginx
+          servicePort: 80
+
+## PATH BASED ##
+#apiVersion: networking.k8s.io/v1beta1
+#kind: Ingress
+#metadata:
+#  name: nginx
+#  annotations:
+#    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+#    traefik.ingress.kubernetes.io/router.tls: "true"
+#spec:
+#  rules:
+#  - http:
+#      paths:
+#      - path: /nginx
+#        backend:
+#          serviceName: nginx
+#          servicePort: 80

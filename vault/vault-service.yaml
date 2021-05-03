@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nexus
+  name: vault
 spec:
   type: ClusterIP  
   selector: 
-    component: nexus
+    component: vault
   ports:
-    - port: 8081
+    - port: 8200
       protocol: TCP
-      targetPort: 8081
+      targetPort: 8200
